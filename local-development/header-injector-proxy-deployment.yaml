@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.17.0 (a74acad)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: header-injector-proxy
+  name: header-injector-proxy
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: header-injector-proxy
+    spec:
+      containers:
+      - env:
+        - name: FORWARD_ADDRESS
+          value: auth-proxy:50800
+        image: header-injector-proxy
+        name: header-injector-proxy
+        ports:
+        - containerPort: 50802
+        resources: {}
+      restartPolicy: Always
+status: {}

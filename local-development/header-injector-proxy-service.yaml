@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.17.0 (a74acad)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: header-injector-proxy
+  name: header-injector-proxy
+spec:
+  ports:
+  - name: "5002"
+    port: 5002
+    targetPort: 50802
+  selector:
+    io.kompose.service: header-injector-proxy
+status:
+  loadBalancer: {}

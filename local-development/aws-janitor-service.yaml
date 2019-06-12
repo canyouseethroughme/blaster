@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.17.0 (a74acad)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: aws-janitor
+  name: aws-janitor
+spec:
+  ports:
+  - name: "50901"
+    port: 50901
+    targetPort: 3000
+  selector:
+    io.kompose.service: aws-janitor
+status:
+  loadBalancer: {}

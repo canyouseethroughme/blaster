@@ -1,0 +1,33 @@
+apiVersion: skaffold/v1beta11
+kind: Config
+build:
+  artifacts:
+  - image: auth-proxy
+    context: src/auth-proxy
+  - image: aws-janitor
+    context: fake_dependencies/aws-janitor
+  - image: capability-service
+    context: fake_dependencies/capability-service
+  - image: header-injector-proxy
+    context: fake_dependencies/header-injector-proxy
+  - image: tika
+    context: fake_dependencies/tika
+  - image: blaster
+
+deploy:
+  kubectl:
+    manifests:
+    - local-development/auth-proxy-deployment.yaml
+    - local-development/auth-proxy-service.yaml
+    - local-development/aws-janitor-deployment.yaml
+    - local-development/aws-janitor-service.yaml
+    - local-development/blaster-deployment.yaml
+    - local-development/blaster-service.yaml
+    - local-development/capability-service-deployment.yaml
+    - local-development/capability-service-service.yaml
+    - local-development/header-injector-proxy-deployment.yaml
+    - local-development/header-injector-proxy-service.yaml
+    - local-development/tika-deployment.yaml
+    - local-development/tika-service.yaml
+    - local-development/blaster-deployment.yaml
+    - local-development/blaster-service.yaml

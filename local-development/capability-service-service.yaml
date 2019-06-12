@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.17.0 (a74acad)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: capability-service
+  name: capability-service
+spec:
+  ports:
+  - name: "50900"
+    port: 50900
+    targetPort: 3000
+  selector:
+    io.kompose.service: capability-service
+status:
+  loadBalancer: {}
