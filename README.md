@@ -113,3 +113,11 @@ The call flow from user to Blaster goes through an AWS ALB for authentication. T
                 |             |
                 +-------------+
 ```
+## Skaffold deployment to minikube
+
+To run a Skaffold deployment with a local minikube:
+1. Make sure you have either Virtualbox or HyperV available
+2. Install minikube and make sure it can create a VM
+3. Download the Skaffold binary, put it in your $PATH and make it executable
+4. Run **minikube start** to deploy a kubernetes cluster in minikube
+5. Run **skaffold dev** to deploy project with Skaffold
