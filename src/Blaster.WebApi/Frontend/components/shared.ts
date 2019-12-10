@@ -1,3 +1,13 @@
+import Vue from "vue";
+import UserManagementPlugin from "../plugins/userManagementPlugin";
+import HttpClientPlugin from "../plugins/httpClientPlugin";
+import {InstallRequestMsalHandler} from "../plugins/HttpHandlers/RequestMsalHandler";
+import ChannelPickerComponent from "./ChannelPickerComponent";
+import ChannelMinimalComponent from "./ChannelMinimalComponent.vue";
+import ChannelListComponent from "./ChannelListComponent.vue";
+import ChannelDropdownComponent from "./ChannelDropdownComponent.vue";
+import ChannelIconComponent from "./ChannelIconComponent.vue";
+import ChannelInputComponent from "./ChannelInputComponent.vue";
 import BannerComponent from './BannerComponents.vue';
 
 function isIE() : number
@@ -18,4 +28,30 @@ function isIE() : number
     }
 }
 
-export {isIE, BannerComponent};
+Vue.use(UserManagementPlugin);
+Vue.use(HttpClientPlugin);
+InstallRequestMsalHandler(Vue);
+
+new Vue({
+    el: ".navbar",
+    computed: {
+        showIEBanner: function () {
+            return isIE();
+        },
+        isActive: function() {
+            return this.active;
+        }
+    },
+    methods: {
+        toggleActive: function () {
+            this.active = !this.active;
+        }
+    },
+    data: {
+        active: false
+    }
+    
+});
+
+
+export {BannerComponent, ChannelPickerComponent, ChannelListComponent, ChannelMinimalComponent, ChannelDropdownComponent, ChannelIconComponent, ChannelInputComponent, isIE};

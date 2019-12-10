@@ -1,6 +1,7 @@
 import Vue from "vue";
 import FeatureFlag from "../util/feature-flag";
 import { isIE, BannerComponent } from "../components/shared";
+import IndexComponent from "./IndexComponent.vue";
 
 
 FeatureFlag.setKeybinding();
@@ -26,5 +27,6 @@ let app = new Vue({
   },
   mounted: function() {
       this.initializing = false;
-  }
+  },
+  render: r => r(IndexComponent)
 });

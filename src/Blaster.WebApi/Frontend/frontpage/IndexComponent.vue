@@ -1,0 +1,68 @@
+<template>
+    <div id="frontpage-app" v-cloak>
+    <banner v-if="showIEBanner" description="Internet Explorer is not a supported browser on the Self Service Portal. Certain functionality is quite likely to not work."></banner>
+
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Welcome</h1>
+            <h2 class="subtitle">
+                Hello {{getUserName() }}, and welcome to the Cloud Self Service portal.
+            </h2>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h1 class="title is-4">Capabilities</h1>
+
+            <p>To get started creating a capability, or joining an existing please go to @Html.ActionLink("Capabilities", "Index", "Capability")</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h1 class="title is-4">Kubernetes</h1>
+            <h2 class="subtitle">
+                Below is a collection of resources for getting started on the Kubernetes platform.
+            </h2>
+
+            <div class="content">
+                <p>
+                    If this is your first visit, please go to <a target="_blank" href="https://playbooks.dfds.cloud/getting-started/journey.html">Kubernetes Getting Started</a>,
+                    for information about what to do to get started.
+                </p>
+
+                <p>
+                    Then grab the default Kubernetes config file (information about location, etc., is also available in the link above):
+                    <br /><br />
+                    <a class="button" href="#kubeconfig"><span class="icon"><i class="fas fa-file-download"></i></span><span>Get Kubernetes config</span></a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    </div>    
+</template>
+
+<script lang="ts">
+import Vue from 'vue';
+import Component from 'vue-class-component';
+import { isIE, BannerComponent } from "../components/shared";
+
+
+const AppProps = Vue.extend({
+  data: () => {
+    return {
+
+    }
+  }
+});
+
+@Component
+export default class IndexComponent extends AppProps {
+    get showIEBanner() {
+        return isIE();
+    }
+}
+
+</script>
