@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blaster
+  namespace: selfservice
+  labels:
+    project: selfservice
+    department: devex
+    app: blaster
+    component: blaster
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: blaster
+  template:
+    metadata:
+      labels:
+        app: blaster
+        project: selfservice
+        department: devex
+    spec:
+      containers:
+        - name: blaster
+          image: blaster
+          ports:
+            - containerPort: 80
+              name: web
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          env:
+            - name: BLASTER_CAPABILITYSERVICE_API_URL
+              value: http://capability-service
+            - name: BLASTER_AWS_JANITOR_API_URL
+              value: http://aws-janitor
+            - name: BLASTER_HARALD_API_URL
+              value: http://harald
+          livenessProbe:
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 5
+            httpGet:
+              port: 80
+              path: /
+          readinessProbe:
+            initialDelaySeconds: 5
+            periodSeconds: 60
+            timeoutSeconds: 5
+            httpGet:
+              port: 80
+              path: /
