@@ -1,26 +1,19 @@
+---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: blaster
+  name: blaster-localcluster
   namespace: selfservice
   annotations:
-    kubernetes.io/ingress.class: traefik
-    traefik.frontend.rule.type: PathPrefixStrip
-  labels:
-    project: selfservice
-    department: devex
+    traefik.ingress.kubernetes.io/frontend-entry-points: https
 spec:
   rules:
-    - host: internal.hellman.oxygen.dfds.cloud
-      http:
-        paths:
-          - path: /blaster
-            backend:
-              serviceName: blaster
-              servicePort: web
-    - host: build.dfds.cloud
-      http:
-        paths:
-          - backend:
-              serviceName: blaster
-              servicePort: web
+  - host: blaster.localcluster
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: blaster
+          servicePort: web
+  tls:
+   - secretName: blaster-tls-cert
