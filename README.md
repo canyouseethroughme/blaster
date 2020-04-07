@@ -47,6 +47,7 @@ Prerequisites:
 
 0. (For Windows) Admin account on the local machine
 1. Git
+2. Python [check which version you need for your operating system](https://github.com/nodejs/node-gyp#installation)
 2. NodeJS/npm or yarn
 5. dotnet core 2.1
 6. You may also quickly want docker, docker-compose, awscli and kubectl but they are not prerequisites per-se
